@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//[Not used] , Custom widget for showing text on the screen
 class StyledText extends StatelessWidget {
   final text;
   const StyledText({super.key, required this.text});
