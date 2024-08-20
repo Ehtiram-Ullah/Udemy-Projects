@@ -8,7 +8,7 @@ class QuizQuestion {
   const QuizQuestion(this.question, this.answers);
 
   //Shuffling the answer
-  List<String> getShuffledAnswers() {
+  List<String> get shuffledAnswers {
     //'List.of' will make a copy of the list and returns it
     final shuffeledList = List.of(answers);
 

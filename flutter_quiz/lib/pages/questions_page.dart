@@ -58,7 +58,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
 
         //'...' this is a spread operator which gonna add all the items from the selected list to the current list
         //map is used to perform some operation on all the items in the list
-        ...currentQuestion.getShuffledAnswers().map((answer) {
+        ...currentQuestion.shuffledAnswers.map((answer) {
           return Padding(
             padding: const EdgeInsets.only(left: 40.0, right: 40, top: 10),
             child: SizedBox(

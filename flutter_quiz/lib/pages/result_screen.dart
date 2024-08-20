@@ -12,7 +12,22 @@ class ResultScreen extends StatelessWidget {
       {super.key, required this.answers, required this.restartFunc});
 
   //Summary of each answer
-  List<Map<String, Object>> getSummaryData() {
+  // List<Map<String, Object>> getSummaryData() {
+  //   List<Map<String, Object>> summary = [];
+  //   for (int i = 0; i < answers.length; i++) {
+  //     summary.add({
+  //       'question_index': i,
+  //       'question': questions[i].question,
+  //       'answer': questions[i].answers[0],
+  //       'user_answer': answers[i],
+  //     });
+  //   }
+  //   return summary;
+  // }
+
+  //We can also do like this, (we are using getter in this, which means we are treating the 'summaryData' as a method)
+  //'get' is used to treat a method as a variable in a class
+  List<Map<String, Object>> get summaryData {
     List<Map<String, Object>> summary = [];
     for (int i = 0; i < answers.length; i++) {
       summary.add({
@@ -27,8 +42,6 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final summaryData = getSummaryData();
-
     //Total nubmer of questions
     final totalQuestions = questions.length;
 
