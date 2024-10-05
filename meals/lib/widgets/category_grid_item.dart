@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/category_model.dart';
 import 'package:meals/models/meal_model.dart';
+import 'package:meals/screens/filter_screen.dart';
 import 'package:meals/screens/meals_screen.dart';
 
 class CategoryGridItem extends StatelessWidget {
   const CategoryGridItem(
-      {super.key, required this.category, required this.onToggleMealFavorite});
+      {super.key,
+      required this.category,
+      required this.onToggleMealFavorite,
+      required this.selectedFilters});
   final CategoryModel category;
+
+  final Map<Filter, bool> selectedFilters;
 
   final Function(MealModel meal) onToggleMealFavorite;
 
@@ -30,6 +36,7 @@ class CategoryGridItem extends StatelessWidget {
                 categoryID: category.id,
                 onToggleMealFavorite: onToggleMealFavorite,
                 title: category.title,
+                filters: selectedFilters,
               ),
             ));
       },

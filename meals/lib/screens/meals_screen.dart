@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/data/dummy_data.dart';
 import 'package:meals/models/meal_model.dart';
+import 'package:meals/screens/filter_screen.dart';
 import 'package:meals/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
@@ -9,8 +10,11 @@ class MealsScreen extends StatelessWidget {
       this.categoryID,
       this.title,
       this.favoriteMeals,
-      required this.onToggleMealFavorite});
+      required this.onToggleMealFavorite,
+      this.filters});
   final String? categoryID;
+
+  final Map<Filter, bool>? filters;
 
   final String? title;
 
@@ -20,9 +24,28 @@ class MealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(favoriteMeals);
     if (categoryID != null) {
-      final List<MealModel> filteredMeals = dummyMeals
+      final availableMeals = dummyMeals.where(
+        (meal) {
+          if (filters![Filter.glutenFree]! && !meal.isGlutenFree) {
+            return false;
+          }
+
+          if (filters![Filter.lactoseFree]! && !meal.isLactoseFree) {
+            return false;
+          }
+
+          if (filters![Filter.vegan]! && !meal.isVegan) {
+            return false;
+          }
+          if (filters![Filter.vegetarian]! && !meal.isVegetarian) {
+            return false;
+          }
+
+          return true;
+        },
+      );
+      final List<MealModel> filteredMeals = availableMeals
           // $ .where()
           //.where is supported on all lists in dart to filter out data conditionally.
           .where((meal) =>

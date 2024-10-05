@@ -16,6 +16,13 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedPageIndex = 0;
 
+  Map<Filter, bool> _selectedFilters = {
+    Filter.glutenFree: false,
+    Filter.lactoseFree: false,
+    Filter.vegetarian: false,
+    Filter.vegan: false,
+  };
+
   void _selectPage(int index) {
     setState(() {
       _selectedPageIndex = index;
@@ -53,8 +60,12 @@ class _TabsScreenState extends State<TabsScreen> {
       final result = await Navigator.push<Map<Filter, bool>>(
           context,
           MaterialPageRoute(
-            builder: (context) => const FilterScreen(),
+            builder: (context) =>
+                FilterScreen(currentFilters: _selectedFilters),
           ));
+      setState(() {
+        _selectedFilters = result ?? _selectedFilters;
+      });
     }
   }
 
@@ -62,6 +73,7 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     Widget activePage = CategoriesScreen(
       onToggleMealFavorite: _toggleMealFavoriteStatus,
+      selectedFilters: _selectedFilters,
     );
 
     String title = "Categories";
